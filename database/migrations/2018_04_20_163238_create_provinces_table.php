@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePropertyStatusesTable extends Migration
+class CreateProvincesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePropertyStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_statuses', function (Blueprint $table) {
+        Schema::create('provinces', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('parent')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreatePropertyStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_statuses');
+        Schema::dropIfExists('provinces');
     }
 }

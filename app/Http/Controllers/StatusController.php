@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\user_status;
+use App\Status;
 use Illuminate\Http\Request;
 
-class UserStatusController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class UserStatusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\user_status  $user_status
+     * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function show(user_status $user_status)
+    public function show(Status $status)
     {
         //
     }
@@ -52,10 +52,10 @@ class UserStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\user_status  $user_status
+     * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function edit(user_status $user_status)
+    public function edit(Status $status)
     {
         //
     }
@@ -64,10 +64,10 @@ class UserStatusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\user_status  $user_status
+     * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, user_status $user_status)
+    public function update(Request $request, Status $status)
     {
         //
     }
@@ -75,10 +75,10 @@ class UserStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\user_status  $user_status
+     * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy(user_status $user_status)
+    public function destroy(Status $status)
     {
         //
     }

@@ -24,10 +24,19 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin', function () {
 	    return view('admin');
 	});
+        // Property route
 	Route::get('/admin/property', "PropertyController@index");
 	Route::post('/admin/property', "PropertyController@store");
-
-
+        
+        // Type route
+	Route::get('/admin/utility', "PropertyTypeController@index");
+	Route::post('/admin/property/type', "PropertyTypeController@store");
+    
+    Route::post('/admin/location', "ProvinceController@store");
+    Route::get('/admin/location/getsubbyparent/{id}', "ProvinceController@getSubByParent");
+        
+	Route::post('/admin/property', "PropertyController@store");
+        
 	Route::get('/admin/academics', "AcademicController@index");
 	Route::post('/admin/academic/post', "AcademicController@store");
 	Route::get('/admin/why_us', "AboutUsController@index");

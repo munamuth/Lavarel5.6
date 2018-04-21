@@ -9,7 +9,7 @@
 			<button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#list"> <span class="fa fa-building"></span> Property</button>
 			<button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#new"><span class="fa fa-plus"></span> New</button>
 		</div>
-		<div class="collapse" id="list" data-parent="#property">
+		<div class="collapse show" id="list" data-parent="#property">
 			<div class="card-body no_padding" >
 				<div class="padding_5 row d-flex flex-row-reverse">
 					<div class="col-12 col-sm-4">
@@ -48,7 +48,7 @@
 									<td><input type="checkbox" name="item[]"></td>
 									<td>{{$p->name}}</td>
 									<td>{{$p->price}}</td>
-									<td>{{$p->user_id}}</td>
+									<td>{{$p->owner->name}}</td>
 									<td>{{$p->location}}</td>
 								</tr>
 							@endforeach
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="collapse show" id="new" data-parent="#property">
+		<div class="collapse" id="new" data-parent="#property">
 			<div class="card-body">
 				<form action="/admin/property" method="post" class="form-horizontal">
 					{{csrf_field()}}
@@ -90,9 +90,38 @@
 
 								<label class='col-12 col-sm-3 col-form-label-sm'>Location</label>
 								<div class="col-12 col-sm-9">
-									<input type="text" name="location" class="form-control form-control-sm" placeholder="Location" required>
+									<div class="row">
+										<div class="form-group col-12 col-sm-4">
+											<label class="col-form-label-sm">City</label>
+											<select name="city" class="form-control form-control-sm">
+												<option value="0">--Select--</option>
+											@foreach(App\Province::where('parent', 0)->orderBy('name')->get() as $city)
+												<option value="{{$city->id}}">{{$city->name}}</option>
+											@endforeach
+											</select>
+										</div>
+										<div class="form-group col-12 col-sm-4">
+											<label class="col-form-label-sm">District</label>
+											<select name="district" class="form-control form-control-sm">
+												<option value="0">--Select--</option>
+											</select>
+										</div>
+										<div class="form-group col-12 col-sm-4">
+											<label class="col-form-label-sm">Commnuce</label>
+											<select name="communce" class="form-control form-control-sm">
+											<option value="0">--Select--</option>
+												
+											</select>
+										</div>
+									</div>
 								</div>
 							</div>
+							<div class="form-group row">
+								<label class='col-12 col-sm-3 col-form-label-sm'></label>
+								<div class="form-group col-12 col-sm-9">
+									<input type="text" name="addr" class="form-control form-control-sm" placeholder="Address">		
+								</div>
+							</div>							
 							<div class="form-group row">
 								<label class='col-12 col-sm-3 col-form-label-sm'>Description</label>	
 								<div class="col-12 col-sm-9">					
@@ -123,4 +152,63 @@
 			</div>
 		</div>
 	</div>
+
+
+	<script type="text/javascript">
+		/* city change event */
+		$(document).on('change', 'select[name="city"]', function() {
+			$value = $(this).val();
+			$.ajax({
+				url : '/admin/location/getsubbyparent/' + $(this).val(),
+				type : 'get',
+				success: function (argument) {
+					if( argument.STATUS == true )
+					{
+						string = getsubbyparent(argument.DATA);
+						console.log(string)
+						$('select[name="district"]').html( string );
+					}
+					else 
+					{
+						console.log('sad')
+					}
+				},
+				error : function (argument) {
+					console.log( argument)
+				}
+			})
+		});
+		/* district change event*/
+		$(document).on('change', 'select[name="district"]', function() {
+			$value = $(this).val();
+			$.ajax({
+				url : '/admin/location/getsubbyparent/' + $(this).val(),
+				type : 'get',
+				success: function (argument) {
+					if( argument.STATUS == true )
+					{
+						string = getsubbyparent(argument.DATA);
+						console.log(string)
+						$('select[name="communce"]').html( string );
+					}
+					else 
+					{
+						console.log('sad')
+					}
+				},
+				error : function (argument) {
+					console.log( argument)
+				}
+			})
+		});
+		/* data for select each location */
+		function getsubbyparent(data) {
+			string = '<option value="0"> --Select-- </option>';
+			for(i = 0; i < data.length; i++)
+			{
+				string += '<option value="'+data[i].name+'">'+data[i].name+'</option>';
+			}
+			return string;
+		}
+	</script>
 @endsection

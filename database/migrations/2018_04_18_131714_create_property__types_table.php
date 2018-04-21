@@ -16,6 +16,7 @@ class CreatePropertyTypesTable extends Migration
         Schema::create('property__types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('status_id')->default(1);
             $table->timestamps();
         });
     }

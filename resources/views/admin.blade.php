@@ -184,15 +184,15 @@
                     <li><a href="#"><i class="  fa fa-th-large"></i> Dashboard</a></li>
                     <li class="hasub"><a href="#"><i class="fa fa-desktop" style="padding-right: 7px;"></i> Content Management <span class="fa fa-angle-double-right"></span></a>
                         <ul class="sub">
-                            <li><a href="/admin/about_us"><i class="fa fa-angle-right"></i> About Us</a></li>
+                            <li><a href="/admin/property"><i class="fa fa-building"></i> Property</a></li>
                             <li><a href="/admin/why_us"><i class="fa fa-angle-right"></i>Why Us</a></li>
                             <li><a href="/admin/academics"><i class="fa fa-angle-right"></i>Academics</a></li>
-                            <li><a href="/admin/compuses"><i class="fa fa-angle-right"></i>Compus</a></li>      
+                            <li><a href="/admin/utility"><i class="fa fa-plus-circle"></i> Utility</a></li>      
                         </ul>
                     </li>
                     <li class="hasub"><a href="#"><i class="fa fa-user" style="padding-right: 13px;"></i> Users Management <span class="fa fa-angle-double-right"></span></a>
                         <ul class="sub">
-                            <!-- <li><a href="/admin/users/admininstrators">Admininstrators</a></li> -->
+                            <li><a href="/admin/users/admininstrators">Admininstrators</a></li>
                             <li><a href="/admin/users">Users</a></li>
                         </ul>
                     </li>

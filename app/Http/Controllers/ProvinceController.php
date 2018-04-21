@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Property_Type;
+use App\Province;
 use Illuminate\Http\Request;
 
-class PropertyTypeController extends Controller
+class ProvinceController extends Controller
 {
-    private $type;
-    public function __construct(property_Type $type)
+    private $location;
+    public function __construct(Province $location)
     {
-        $this->type = $type;
+        $this->location = $location;
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class PropertyTypeController extends Controller
      */
     public function index()
     {
-        return view('admin.utility');
+        //
     }
 
     /**
@@ -41,17 +41,17 @@ class PropertyTypeController extends Controller
     public function store(Request $request)
     {
         $data = array(
-                'name' => $request->name,
-                'status_id' => $request->status,
+                'name' => $request->name , 
+                'parent' => $request->parent , 
             );
-        $insert = $this->type->insert($data);
-        if($insert)
+        $insert = $this->location->insert($data);
+        if( $insert )
         {
             $request->session()->flash('status', 'Success!!!');
         }
-        else 
+        else
         {
-             $request->session()->flash('status', 'Failed!!!');
+            $request->session()->flash('status', 'Failed!!!');
         }
         return back();
     }
@@ -59,21 +59,40 @@ class PropertyTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Property_Type  $property_Type
+     * @param  \App\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function show(Property_Type $property_Type)
+    public function show(Province $province)
     {
-        //
+        
+    }
+
+    public function getSubByParent($parent)
+    {
+        $sub = $this->location->where('parent', $parent)->get();
+        if( !empty($sub))
+        {
+            return Response()->json([
+                'STATUS' => true,
+                'DATA' => $sub,
+            ], 200);
+        }
+        else
+        {
+            return Response()->json([
+                'STATUS' => false,
+                'CODE' => 404,
+            ], 200);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Property_Type  $property_Type
+     * @param  \App\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function edit(Property_Type $property_Type)
+    public function edit(Province $province)
     {
         //
     }
@@ -82,10 +101,10 @@ class PropertyTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Property_Type  $property_Type
+     * @param  \App\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Property_Type $property_Type)
+    public function update(Request $request, Province $province)
     {
         //
     }
@@ -93,10 +112,10 @@ class PropertyTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Property_Type  $property_Type
+     * @param  \App\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Property_Type $property_Type)
+    public function destroy(Province $province)
     {
         //
     }

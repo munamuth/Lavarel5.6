@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Property_StatusTableSeeder extends Seeder
+class StatusTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class Property_StatusTableSeeder extends Seeder
 		        	['name' => 'Pending',] , 
 		        	['name' => 'Inactive',] , 
 		        );
-       App\Property_Status::insert($data);
+       App\status::insert($data);
     }
 }
