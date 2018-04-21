@@ -157,7 +157,7 @@
 	<script type="text/javascript">
 		/* city change event */
 		$(document).on('change', 'select[name="city"]', function() {
-			$value = $(this).val();
+			$value = $(this).prop('fax');
 			$.ajax({
 				url : '/admin/location/getsubbyparent/' + $(this).val(),
 				type : 'get',
@@ -180,11 +180,11 @@
 		});
 		/* district change event*/
 		$(document).on('change', 'select[name="district"]', function() {
-			$value = $(this).val();
 			$.ajax({
 				url : '/admin/location/getsubbyparent/' + $(this).val(),
 				type : 'get',
 				success: function (argument) {
+					console.log(argument);
 					if( argument.STATUS == true )
 					{
 						string = getsubbyparent(argument.DATA);
@@ -206,7 +206,7 @@
 			string = '<option value="0"> --Select-- </option>';
 			for(i = 0; i < data.length; i++)
 			{
-				string += '<option value="'+data[i].name+'">'+data[i].name+'</option>';
+				string += '<option value="'+data[i].id+'" fax="1">'+data[i].name+'</option>';
 			}
 			return string;
 		}

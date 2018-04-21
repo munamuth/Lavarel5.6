@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Property;
 use Illuminate\Http\Request;
 use App\Property_type;
+use App\Province;
 class PropertyController extends Controller
 {
-    private $property, $type;
+    private $property, $type, $location;
 
-    public function __construct(Property $property, Property_type $type)
+    public function __construct(Property $property, Property_type $type, Province $location)
     {
         $this->property = $property;
         $this->type = $type;
+        $this->location = $location;
     }
     /**
      * Display a listing of the resource.
@@ -44,11 +46,15 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
+
+        $city = $this->location->where('id', $request->city)->first()->name;
+        $district = $this->location->where('id', $request->district)->first()->name;
+        $communce = $this->location->where('id', $request->communce)->first()->name;
         $data = array(
                 'name' => $request->name,
                 'type_id' => $request->type,
                 'price' => $request->price,
-                'location' => $request->location,
+                'location' => $request->addr.', '.$communce.', '. $district.', '.$city,
                 'descr' => $request->descr,
                 'user_id' => 1,
                 'status_id' => 1,
