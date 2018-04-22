@@ -24,6 +24,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin', function () {
 	    return view('admin');
 	});
+
+	Route::get('/admin/admin', function () {
+	    return view('test');
+	});
+
+	Route::post('/admin/admin', 'PropertyController@test');
+
         // Property route
 	Route::get('/admin/property', "PropertyController@index");
 	Route::post('/admin/property', "PropertyController@store");

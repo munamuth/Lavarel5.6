@@ -6,6 +6,7 @@ use App\Property;
 use Illuminate\Http\Request;
 use App\Property_type;
 use App\Province;
+use App\Http\Controllers\ImageUpload;
 class PropertyController extends Controller
 {
     private $property, $type, $location;
@@ -15,6 +16,14 @@ class PropertyController extends Controller
         $this->property = $property;
         $this->type = $type;
         $this->location = $location;
+    }
+
+
+
+    public function test(Request $request)
+    {
+        $name =  $request->name;
+        ImageUpload::save($name);
     }
     /**
      * Display a listing of the resource.
